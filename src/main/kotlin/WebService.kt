@@ -1,7 +1,6 @@
 import okhttp3.ResponseBody
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface WebService {
     @GET("get")
@@ -9,4 +8,8 @@ interface WebService {
 
     @GET("status/{codes}")
     fun testStatis(@Path("codes") codes: Int): Call<ResponseBody>
+
+//    @Headers("foxtech-appid:123, foxtech-apptoken: ABC")
+    @POST("foxTech/mobile/testHeader")
+    fun testHeader(@Body one : String): Call<ResponseBody>
 }
