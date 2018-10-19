@@ -6,17 +6,14 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
-import com.sun.corba.se.spi.presentation.rmi.StubAdapter.request
 import okhttp3.logging.HttpLoggingInterceptor
-import com.sun.corba.se.spi.presentation.rmi.StubAdapter.request
-import sun.util.logging.PlatformLogger
 
 
 fun main(args: Array<String>) {
 
-//    testStatus(404)
+    testStatus(200)
 //    testContent()
-    testHeaders()
+//    testHeaders()
 }
 
 fun testContent(){
@@ -43,6 +40,8 @@ fun testContent(){
     var call = webService.testGet()
     call.enqueue(object : Callback<Content> {
         override fun onFailure(call: Call<Content>, t: Throwable) {
+            println("onFailure")
+            println(t.printStackTrace())
 
         }
 
@@ -85,7 +84,8 @@ fun testStatus(codes: Int){
     call.enqueue(object : Callback<ResponseBody> {
 
         override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-
+            println("onFailure")
+            println(t.printStackTrace())
         }
 
         override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
@@ -114,8 +114,8 @@ fun testHeaders(){
                 val request = it.request()
                 val newRequest: Request
                 newRequest = request.newBuilder()
-                        .addHeader("foxtech-appid","123")
-                        .addHeader("foxtech-apptoken","ABC")
+                        .addHeader("appid","123")
+                        .addHeader("apptoken","ABC")
                         .build()
                 it.proceed(newRequest)
             }
@@ -134,7 +134,7 @@ fun testHeaders(){
             .build()
 
     var webService= retrofit.create(WebService::class.java)
-    var call = webService.testHeader("Fox-Tech")
+    var call = webService.testHeader("YOYO")
 
     call.enqueue(object : Callback<ResponseBody> {
 

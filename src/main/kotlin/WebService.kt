@@ -9,7 +9,7 @@ interface WebService {
     @GET("status/{codes}")
     fun testStatis(@Path("codes") codes: Int): Call<ResponseBody>
 
-//    @Headers("foxtech-appid:123, foxtech-apptoken: ABC")
-    @POST("foxTech/mobile/testHeader")
+//    @Headers("appid:123, apptoken: ABC")
+    @POST("testHeader")
     fun testHeader(@Body one : String): Call<ResponseBody>
 }

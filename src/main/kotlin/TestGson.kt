@@ -9,11 +9,22 @@ import com.google.gson.reflect.TypeToken
 val content=
         """
 {
-  "origin": "118.163.76.6",
-  "url": null
+  "origin": "123",
+  "url": null,
+  "status" : 1
 }
         """
+val dataContent =
+        """{
+    "status": 0,
+    "field1" : 1934,
+    "field2" : {
+        "dataField1" : "dag34g34y3",
+        "dataField2" : "dag34hw34hw3"
+    }
+}
 
+        """.trimIndent()
 val map = """
 
 {
@@ -39,20 +50,16 @@ fun main(args: Array<String>) {
 //    print(gson.toJson(readWriteMap))
 
 
-    val testGet = gson.fromJson<TestMap>(map, TestMap::class.java)
-
-    var value = testGet.origin["foo"]
-
-
-    print( value as? Int)
-
-    var a = "1"
-
-
-//    var test2 = TestMap(readWriteMap, "")
+//    val testGet = gson.fromJson<TestMap>(map, TestMap::class.java)
 //
-//    print(gson.toJson(test2))
+//    var value = testGet.origin["foo"]
 
+    var testContent = gson.fromJson<Content>(content, Content::class.java)
+    println(testContent)
+
+
+    var testDataContent = gson.fromJson<DataContent>(dataContent, DataContent::class.java)
+    println(testDataContent)
 }
 
 class MyYtpe :JsonDeserializer<Content>{
@@ -64,7 +71,7 @@ class MyYtpe :JsonDeserializer<Content>{
         if(json?.asJsonObject?.get("url")?.isJsonNull!!){
 
         }else{
-            testGet.url = json?.asJsonObject?.get("url")?.asString!!
+//            testGet.url = json?.asJsonObject?.get("url")?.asString!!
         }
 
         return testGet
